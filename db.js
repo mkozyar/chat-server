@@ -1,5 +1,23 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mkozyar:mkozyar@ds129641.mlab.com:29641/chat_db');
+var state = {
+  db: null
+};
 
-module.exports = mongoose.connection;
+exports.connect = function (url, done) {
+  if (state.db) {
+    return done();
+  }
+
+  mongoose.connect(url, function (err, db) {
+    if (err) {
+      return done(err);
+    }
+    state.db = db;
+    done()
+  });
+}
+
+exports.get = function () {
+    return state.db;
+  }
