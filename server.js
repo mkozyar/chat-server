@@ -1,5 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var connect = require('connect');
+var session = require('express-session');
+var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 var db = require('./db');
 var chatsController = require('./controllers/chats');
 var messagesController = require('./controllers/messages');
@@ -8,6 +12,7 @@ var registerController = require('./controllers/register');
 var loginController = require('./controllers/login');
 
 var app = express();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +23,17 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 })
+
+app.use(session({
+  secret: "secret",
+  key: "key",
+  cookie: {
+    "path": '/',
+    "httpOnly": true
+  },
+  store: new MongoStore({mongooseConnection: mongoose.connection})
+}))
+
 
  app.get('/', function (req, res) {
      res.send('Hello API')
