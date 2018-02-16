@@ -5,6 +5,7 @@ var chatsController = require('./controllers/chats');
 var messagesController = require('./controllers/messages');
 var usersController = require('./controllers/users');
 var registerController = require('./controllers/register');
+var loginController = require('./controllers/login');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(function(req, res, next) {
  app.get('/messages/:chatRoom', messagesController.messagesByChat);
  app.get('/users', usersController.getUsers);
  app.post('/registration', registerController.registration);
+ app.post('/login', loginController.login);
 
 db.connect('mongodb://mkozyar:mkozyar@ds129641.mlab.com:29641/chat_db', function (err) {
     if (err) {
