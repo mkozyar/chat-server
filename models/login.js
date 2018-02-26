@@ -16,7 +16,7 @@ exports.login = function (data, cb) {
                 return cb(err)
             }
             if (!isMatch) {
-                return cb(null, user, { msg: 'wrong pass' })
+                return cb(null, false, { msg: 'wrong pass' })
             }
             return cb(null, user, { msg: 'ok!' })
         })
