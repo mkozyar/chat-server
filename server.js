@@ -40,7 +40,9 @@ app.use(function (req, res, next) {
 app.post('/registration', registerController.registration);
 app.post('/login', loginController.login);
 
-app.use(checkAuth.checkAuth)
+
+// TODO : checkAuth
+//app.use(checkAuth.checkAuth)
 
 
 app.get('/chats/:login', chatsController.chatsByUser);
