@@ -24,3 +24,19 @@ exports.login = function (data, cb) {
     })
 
 } 
+exports.checkAuth = function (data, cb) {
+    db.get().collection('users').findOne({ login: data.login }, function (err, user) {
+        if (err) {
+            return cb(err)
+        }
+
+        if (!user) {
+            return cb(null, false,  {msg: 'no found' })
+        }
+
+        if(data.password === user.password){
+            return cb(null, user, { msg: 'ok!' })
+        }
+    })
+
+} 
