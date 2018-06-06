@@ -17,7 +17,8 @@ exports.login = function (req, res) {
             var token = jwt.encode(user, 'secretkey')
             var form = {
                 token: token,
-                user: user.login
+                user: user.login,
+                userAvatar: user.avatar
             }
             return res.send(form);
  
