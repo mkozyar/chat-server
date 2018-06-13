@@ -52,6 +52,7 @@ app.get('/chats/:login', chatsController.chatsByUser);
 app.get('/messages/:chatRoom', messagesController.messagesByChat);
 
 app.get('/users', usersController.getUsers);
+app.get('/users/:userName', usersController.getUserDetail);
 
 app.get('/', function (req, res) {
   res.send('Hello API')

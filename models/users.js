@@ -16,3 +16,14 @@ exports.getUsers = function (req, cb) {
         cb(err, users);
     })
 }
+exports.getUserDetail = function (req, cb) {
+    db.get().collection('users').findOne({ "login": req.params.userName }, function (err, user) {
+        var selectedUser = {
+            name: user.login,
+            email: user.email,
+            avatar: user.avatar,
+            status: user.status
+        }
+        cb(err, selectedUser);
+    })
+}
