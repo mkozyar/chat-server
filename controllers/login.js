@@ -18,7 +18,8 @@ exports.login = function (req, res) {
             var form = {
                 token: token,
                 user: user.login,
-                userAvatar: user.avatar
+                userAvatar: user.avatar,
+                connectionRequests: user.requests
             }
             return res.send(form);
  
@@ -27,8 +28,7 @@ exports.login = function (req, res) {
     })
 } 
 exports.checkAuth = function(req){
-    Login.checkAuth(req, function (err, user) {
-       
+    Login.checkAuth(req, function (err, user) {       
         if (err) {
             return res.sendStatus(403);
         }

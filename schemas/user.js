@@ -15,7 +15,8 @@ var userSchema = new mongoose.Schema({
         type: String,
         default: 'Your status here...'
     }, 
-    rooms: []
+    rooms: [],
+    requests: []
 });
 
 

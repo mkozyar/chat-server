@@ -21,3 +21,13 @@ exports.getUsers = function (req, res) {
       res.send(doc);
     })
   }
+
+  exports.connectionRequest = function (req, res) {
+    Users.connectionRequest(req, function (err) {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(500);
+      }
+      res.sendStatus(200);
+    })
+  }
