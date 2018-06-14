@@ -33,3 +33,18 @@ exports.connectionRequest = function (req, cb) {
         cb(err, user);
     })
 }
+
+exports.getUserConnections = function (req, cb) {
+    db.get().collection('users').find({$and: [{"login": {$in: req.body.connectionRequests}}, {"login":  { $regex: req.body.connectionsSearch || '', '$options': 'i' }}]}).toArray( function (err, users) {
+        var connections = []
+        users.forEach(function(e) {
+            connections.push({
+                login: e.login,
+                email: e.email,
+                avatar: e.avatar,
+                status: e.status
+            })
+        }, this);
+        cb(err, connections);
+    })
+}

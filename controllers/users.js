@@ -31,3 +31,13 @@ exports.getUsers = function (req, res) {
       res.sendStatus(200);
     })
   }
+  
+  exports.getUserConnections = function (req, res) {
+    Users.getUserConnections(req, function (err, doc) {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(500);
+      }
+      res.send(doc);
+    })
+  }
